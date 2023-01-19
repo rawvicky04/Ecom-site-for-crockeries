@@ -1,0 +1,93 @@
+
+.cartPage-image{
+    background-color: white;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+.cartPage-price-details{
+    background-color: white;
+    border-left: solid 1px gainsboro;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartPage-product-desc{
+    text-align: left;
+}
+
+.cartPage-fab-button-circle{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartPage-add-remove-fab-button{
+    max-width: 25%;
+}
+
+
+
+@media screen and (min-width: 300px) {
+    .cartPage-product-list{
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin: 10px;
+    }
+    
+    .cartPage-image img{
+        height: 200px;
+        width: -webkit-fill-available;
+    }
+    .cartPage-product-details{
+        display: none;
+    }
+
+    .cartPage-fab-button-title{
+        margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 790px) {
+    .cartPage-product-list{
+        display: grid;
+        grid-template-columns: 20% 50% 30%;
+        margin: 10px;
+    }
+    .cartPage-image img{
+        height: 200px;
+        width: -webkit-fill-available;
+    }
+    .cartPage-product-details{
+        display:flex;
+        flex-direction: column;
+        background-color: white;
+        border-left: solid 1px gainsboro;
+        padding: 10px;
+    }
+    .cartPage-fab-button-title{
+        display: none;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    .cartPage-product-list{
+        display: grid;
+        grid-template-columns: 20% 50% 30%;
+        margin: 10px;
+    }
+    .cartPage-image img{
+        height: 200px;
+        /* object-fit: cover; */
+    }
+    .cartPage-product-details{
+        background-color: white;
+        border-left: solid 1px gainsboro;
+        padding: 10px;
+    }
+}
+
+
