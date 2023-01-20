@@ -23,6 +23,7 @@ import {userLogout} from './redux/userSlice'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import reset from './redux/CounterSlice'
+import { useNavigate } from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(
   props,
@@ -84,6 +85,7 @@ function Appbar() {
     const user = useSelector((state) => state.user.name);
     const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
     const vertical = "top", horizontal = "center";
+    const navigate = useNavigate();
 
     const handleUserLogout = () =>{
       dispatch(userLogout());
@@ -92,6 +94,12 @@ function Appbar() {
       handleMobileMenuClose();
       setOpenSuccessSnackbar(true);
       // dispatch(reset());
+    }
+
+    const handleProfilePage = () =>{
+      navigate("/profile");
+      setAnchorEl(null);
+      handleMobileMenuClose();
     }
 
     const handleSuccessSnackClose = () =>{
@@ -135,7 +143,7 @@ function Appbar() {
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          <MenuItem onClick={handleProfilePage}>My account</MenuItem>
           <MenuItem onClick={handleUserLogout}>Logout</MenuItem>
         </Menu>
       );
@@ -287,7 +295,7 @@ function Appbar() {
           {renderMobileMenu}
           {renderMenu}
           {openSuccessSnackbar && 
-            <Snackbar open={openSuccessSnackbar} autoHideDuration={10000}  anchorOrigin={{ vertical , horizontal }} onClose={handleSuccessSnackClose}>
+            <Snackbar open={openSuccessSnackbar} autoHideDuration={2000}  anchorOrigin={{ vertical , horizontal }} onClose={handleSuccessSnackClose}>
               <Alert onClose={handleSuccessSnackClose} severity="success" sx={{ width: '100%' }}>
                 You have been successfully logout.
               </Alert>

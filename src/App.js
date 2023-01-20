@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from './components/firebase/firebase';
 import { incrementByAmount } from './components/redux/CounterSlice';
+import ProfilePage from './components/profile/ProfilePage';
+import CartCheckOutPage from './components/cart/CartCheckOutPage';
 
 function App() {
   const admin = useSelector((state) => state.user.name);
@@ -37,6 +39,7 @@ function App() {
   // }, [userUid])
 
   console.log("User", admin);
+  console.log(userUid);
   return (
     <div className="App">
       <BrowserRouter>
@@ -45,6 +48,8 @@ function App() {
           <Route path= '/cart' element={<CartPage />} />
           <Route path = '/signUp' element={<SignUpPage />} />
           <Route path= '/login' element={<LoginPage />} />
+          <Route path= '/profile' element={<ProfilePage />} />
+          <Route path= 'checkout' element={<CartCheckOutPage />} />
         </Routes>
       </BrowserRouter>
       

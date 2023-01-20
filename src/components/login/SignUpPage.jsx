@@ -47,7 +47,8 @@ function SignUpPage() {
                 gender: "",
             });
             let userObj = {
-                name: firstName,
+                first_name: firstName,
+                last_name: lastName,
                 email: email,
                 accessToken: userCredential.user.accessToken,
                 uid: userCredential.user.uid
@@ -59,6 +60,7 @@ function SignUpPage() {
             console.log(error);
             const errorCode = error.code;
             const errorMessage = error.message;
+            alert(errorCode + errorMessage);
           });
     }
 

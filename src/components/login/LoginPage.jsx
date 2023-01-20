@@ -13,6 +13,8 @@ import SendIcon from '@mui/icons-material/Send';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 function LoginPage() {
 
@@ -33,9 +35,21 @@ function LoginPage() {
         e.preventDefault();
         signInWithEmailAndPassword(auth, user, password)
         .then((userCredential) => {
-            const user = userCredential.user;
-            dispatch(userName(user));
-            navigate("/");
+            const userUid = userCredential.user.uid;
+            console.log(userCredential.user.uid);
+            getDoc(doc(db, "users", userUid)).then((userDetails) => {
+                let userObj = {
+                    first_name: userDetails.data().first_name,
+                    last_name: userDetails.data().last_name,
+                    email: userDetails.data().email,
+                    accessToken: userDetails.data().accessToken,
+                    uid: userCredential.user.uid
+                }
+                dispatch(userName(userObj));
+                navigate("/");
+            })
+            // dispatch(userName(user));
+            // navigate("/");
             
         }).catch((error) => {
             const errorCode = error.code;

@@ -28,6 +28,37 @@
     max-width: 25%;
 }
 
+.cart-checkout-page-main-component{
+    margin-top: 80px;
+    justify-content: center;
+}
+
+.cart-checout-adderss-component{
+    display: grid;
+    grid-template-columns: 20% 30%;
+    justify-content: center;
+    margin: 10px;
+}
+
+.cart-checkout-cofirm-button{
+    background-color: #1976d2;
+    border: 0;
+    width:fit-content;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+.cart-checkout-adderss-text-area{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 5px;
+    padding: 5px;
+}
 
 
 @media screen and (min-width: 300px) {
@@ -47,6 +78,43 @@
 
     .cartPage-fab-button-title{
         margin-top: 0;
+    }
+    .cart-page-checkout-component{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin: 5px;
+        margin-right: 0px;
+    }
+
+    .cart-page-total-cart-price-component{
+        display: flex;
+        background-color: white;
+        margin-right: 5px;
+    }
+
+    .cart-page-checkout-final-button{
+        background-color: #1976d2;
+        border: 0;
+        width:fit-content;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .cart-checkout-message-component{
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .cart-checout-adderss-component{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 10px;
     }
 }
 
@@ -70,6 +138,44 @@
     .cartPage-fab-button-title{
         display: none;
     }
+    .cart-page-checkout-component{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin: 5px;
+        margin-right: 0px;
+    }
+
+    .cart-page-total-cart-price-component{
+        display: flex;
+        background-color: white;
+        margin-right: 5px;
+    }
+
+    .cart-page-checkout-final-button{
+        background-color: #1976d2;
+        border: 0;
+        width:fit-content;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .cart-checkout-message-component{
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .cart-checout-adderss-component{
+        display: grid;
+        grid-template-columns: 20% 30%;
+        justify-content: center;
+        margin: 10px;
+    }
 }
 
 
@@ -87,6 +193,44 @@
         background-color: white;
         border-left: solid 1px gainsboro;
         padding: 10px;
+    }
+    .cart-page-checkout-component{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin: 5px;
+        margin-right: 0px;
+    }
+
+    .cart-page-total-cart-price-component{
+        display: flex;
+        background-color: white;
+        margin-right: 5px;
+    }
+
+    .cart-page-checkout-final-button{
+        background-color: #1976d2;
+        border: 0;
+        width:fit-content;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .cart-checkout-message-component{
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .cart-checout-adderss-component{
+        display: grid;
+        grid-template-columns: 20% 30%;
+        justify-content: center;
+        margin: 10px;
     }
 }
 

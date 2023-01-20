@@ -16,9 +16,10 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Fab from '@mui/material/Fab';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 
 function CartPage() {
-
+    const navigate = useNavigate();
     const cartItems = useSelector((state) => state.cartProduct.product);
     const user = useSelector((state) => state.user.name);
     console.log("Cart Items", cartItems);
@@ -26,7 +27,8 @@ function CartPage() {
     const [cartArray, setCartArray] = useState([]);
     const [flag, setFlag] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const [totalCartPrice, setTotalCartPrice] = useState(0);
+    let sumOfCart = 0;
     useEffect(()=>{
       if(user !== ""){
         setLoading(true);
@@ -41,6 +43,7 @@ function CartPage() {
             getDoc(doc(db,"cart", item)).then((cartItem)=>{
               console.log("cart item", cartItem.data());
               getDoc(doc(db,"products", cartItem.data().productId)).then((productDetails) => {
+                sumOfCart += (productDetails.data().price * cartItem.data().quantity);
                 let cartDetails = {
                   productName : productDetails.data().name,
                   productDescription : productDetails.data().description,
@@ -50,8 +53,9 @@ function CartPage() {
                   totalPrice : productDetails.data().price * cartItem.data().quantity,
                   cartId: item,
                   productId: cartItem.data().productId,
+
                 }
-                
+                setTotalCartPrice(sumOfCart);
                 setCartArray(prev => [...prev, cartDetails]);
                 setLoading(false);
               })
@@ -80,6 +84,10 @@ function CartPage() {
       setCartArray([]);
       setFlag(!flag);
       setLoading(false);
+    }
+
+    const handleCartCheckout = () =>{
+      navigate("/checkout");
     }
 
     const handleRemoveCartItem = (e, id) =>{
@@ -134,7 +142,9 @@ function CartPage() {
   return (
     <div>
         <Appbar />
-        <h1 style={{marginTop: "70px"}} onClick={fetchUser}>Cart Items</h1>
+        <h1 style={{marginTop: "70px"}} 
+          // onClick={fetchUser}
+        >Cart Items</h1>
         {
         user === "" 
           ? 
@@ -197,6 +207,20 @@ function CartPage() {
               );
               return list;
             })
+        }
+        {
+          user === "" || cartArray.length === 0
+            ?
+              <></>
+            :
+              <div className='cart-page-checkout-component'>
+                <div className='cart-page-total-cart-price-component'>
+                  <p>Total Cart Value</p>
+                  <p> <CurrencyRupeeIcon fontSize='small'/> </p>
+                  <p>{totalCartPrice}</p>
+                </div>
+                <button className='cart-page-checkout-final-button' onClick={handleCartCheckout}>Proceed To Checkout</button>
+              </div>
         }
         {loading && <CircularProgress />}
     </div>
