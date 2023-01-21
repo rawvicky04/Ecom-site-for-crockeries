@@ -39,7 +39,6 @@ function App() {
   // }, [userUid])
 
   console.log("User", admin);
-  console.log(userUid);
   return (
     <div className="App">
       <BrowserRouter>
