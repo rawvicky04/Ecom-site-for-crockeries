@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import NativeSelect from '@mui/material/NativeSelect';
+import InputLabel from '@mui/material/InputLabel';
 import SendIcon from '@mui/icons-material/Send';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Typography } from '@mui/material';
@@ -78,10 +80,25 @@ function SignUpPage() {
                 noValidate
                 autoComplete="off"
                 >
-                <TextField id="standard-basic" label="First Name" variant="standard" name='fname' onChange={handleChange}/>
+                <TextField label="First Name" variant="standard" name='fname' onChange={handleChange}/>
                 <br></br>  
-                <TextField id="standard-basic" label="Last Name" variant="standard" name='lname' onChange={handleChange}/>
-                <br></br> 
+                <TextField label="Last Name" variant="standard" name='lname' onChange={handleChange}/>
+                {/* <br></br> 
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Age
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    inputProps={{
+                    name: 'age',
+                    id: 'uncontrolled-native',
+                    }}
+                >
+                    <option value={10}>Ten</option>
+                    <option value={20}>Twenty</option>
+                    <option value={30}>Thirty</option>
+                </NativeSelect> */}
+                <br></br>
                 <TextField id="standard-basic" label="Email" variant="standard" name='email' onChange={handleChange}/>
                 <br></br>
                 <TextField id="standard-adornment-password" label="Password" variant="standard" type={"password"} name = 'password' onChange={handleChange}/>

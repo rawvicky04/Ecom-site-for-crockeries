@@ -17,7 +17,8 @@ import { db } from './firebase/firebase'
 import { setDoc, doc, addDoc, collection, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
 
 function ProductDrawer(props) {
-    // console.log(props);
+    console.log(props.productDetails.id);
+    console.log(props.productDetails.data);
     const cartItems = useSelector((state) => state.cartProduct.product);
     const user = useSelector((state) => state.user.name);
     const userUid = useSelector((state) => state.user.uid);
@@ -40,7 +41,7 @@ function ProductDrawer(props) {
                     productId: props.id,
                     quantity: count+qty,
                 }).then((item)=>{
-                    console.log(item.id);
+                    // console.log(item.id);
                     console.log(item.data());
                     // const userRef = doc(db, "users", userUid);
                     // updateDoc(userRef,{
@@ -100,6 +101,15 @@ function ProductDrawer(props) {
         }
     }
 
+    const handleProductClick = () =>{
+        navigate("/productPage", {
+            state: {
+                id: props.productDetails.id,
+                data: props.productDetails.data,
+            }
+        });
+    }
+
   return (
     <SwipeableDrawer
         anchor={"bottom"}
@@ -115,6 +125,7 @@ function ProductDrawer(props) {
                     height="340"
                     image={props.photo}
                     alt="green iguana"
+                    onClick={handleProductClick}
                     />
                 </CardActionArea>
             </Card>

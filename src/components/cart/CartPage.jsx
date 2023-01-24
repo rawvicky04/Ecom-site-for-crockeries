@@ -28,7 +28,10 @@ function CartPage() {
     const [flag, setFlag] = useState(false);
     const [loading, setLoading] = useState(false);
     const [totalCartPrice, setTotalCartPrice] = useState(0);
+
+
     let sumOfCart = 0;
+
     useEffect(()=>{
       if(user !== ""){
         setLoading(true);
@@ -47,7 +50,7 @@ function CartPage() {
                 let cartDetails = {
                   productName : productDetails.data().name,
                   productDescription : productDetails.data().description,
-                  productImage : productDetails.data().imageUrl,
+                  productImage : productDetails.data().thumbnail,
                   productPrice : productDetails.data().price,
                   productQty : cartItem.data().quantity,
                   totalPrice : productDetails.data().price * cartItem.data().quantity,
@@ -69,8 +72,9 @@ function CartPage() {
     },[flag])
 
     const fetchUser = async () => {
-      const userDetails = await getDoc(doc(db,"users", "iuShFoFRRXNk2bx9wsgSYXrebE73"));
-      console.log("userDetails", userDetails.data());
+      // const userDetails = await getDoc(doc(db,"users", "iuShFoFRRXNk2bx9wsgSYXrebE73"));
+      // console.log("userDetails", userDetails.data());
+      navigate("/order");
     }
 
     const handleCartItemRemove = (e) =>{
@@ -126,7 +130,7 @@ function CartPage() {
         addDoc(collection(db, "products"), {
         name: product.name,
         description: product.description,
-        imageUrl: product.imageUrl
+        imageUrl: product.thumbnail
         }
       )));
   

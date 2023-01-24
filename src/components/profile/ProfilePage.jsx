@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Appbar from '../Appbar'
 import './profilePage.css'
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
-    
+    const navigate = useNavigate();
     const email = useSelector((state) => state.user.email);
     const uid = useSelector((state) => state.user.uid);
     const firstName = useSelector((state) => state.user.name);
@@ -32,6 +33,10 @@ function ProfilePage() {
             setGender(e.target.value);
         }
     }
+
+    // const handleAddProduct = () =>{
+    //     navigate("/addProduct")
+    // }
     
   return (
     <div>
@@ -55,6 +60,7 @@ function ProfilePage() {
                 <input type="text" name='gender' value={gender} onChange={handleChange}/>
             </div>
         </div>
+        {/* <button onClick={handleAddProduct}>Add Product</button> */}
     </div>
   )
 }

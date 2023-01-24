@@ -1,0 +1,60 @@
+.main-home-page-carousel-main-component{
+    margin-top: 70px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.carousel-img{
+    height: 300px;
+    cursor: pointer;
+}
+
+.carousel-img:hover{
+    opacity: 0.8;
+    
+}
+
+.carousel-img > img{
+    /* height: 100%; */
+    width: 100%;
+    /* object-fit:contain; */
+    height: 300px;
+}
+
+.carousel-img-title{
+    margin-top: -200px;
+    margin-left: 70%;
+}
+
+.carousel-img-title:hover{
+    opacity: 1;
+}
+
+@media screen and (min-width: 764px) {
+    .carousel-img{
+        height: 400px;
+    }
+    .carousel-img > img{
+        /* height: 100%; */
+        /* width: 100%; */
+        object-fit:cover;
+        height: 400px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .carousel-img{
+        height: 500px;
+        /* background-image: linear-gradient(bottom to top black white), ; */
+        background-color: gainsboro;
+    }
+    .carousel-img > img{
+        height: 100%;
+        width: 100%;
+        /* object-fit:cover;
+        height: 500px; */
+    }
+    .carousel-img-title{
+        margin-top: -400px;
+        margin-left: 70%;
+    }
+}

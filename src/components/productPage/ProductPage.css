@@ -1,0 +1,45 @@
+.product-page-main-component{
+    margin-top: 75px
+}
+
+.product-page-top-component{
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.product-page-image-component{
+    height: 300px;
+    margin: 5px;
+}
+
+.product-page-paper-image > img{
+    height: 298px;
+    object-fit: contain;
+}
+
+.product-page-details-component{
+    margin: 5px;
+    padding: 5px;
+    text-align: left;
+}
+
+.product-page-title > h2{
+    margin-top: 0;
+}
+
+.product-page-price{
+    display: flex;
+}
+
+.product-page-main-component{
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid gainsboro;
+}
+
+@media screen and (min-width: 764px) {
+    .product-page-top-component{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}

@@ -3,7 +3,7 @@
   }
 
 .mainpage-main-component{
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
 .mainpage-photos{
@@ -79,6 +79,12 @@
 
 .mainpage-card-component{
     margin: 5px;
+}
+
+.mainpage-card-component:hover{
+    transform: translateY(-10px);
+    transition: transform 50ms;
+    opacity: 0.8;
 }
 
 .product-draw-left-right{

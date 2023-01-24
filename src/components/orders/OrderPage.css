@@ -1,0 +1,37 @@
+.order-page-orders{
+    margin: 10px;
+    border-bottom: 2px solid gainsboro;
+}
+
+.order-page-order-items{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+}
+
+.order-page-order-items-image{
+    padding: 10px;
+    background-color: white;
+    margin: 2px;
+}
+
+.order-page-order-items-image > img{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.order-page-order-items-details{
+    padding: 5px;
+    text-align: left;
+    background-color: white;
+    margin: 2px;
+}
+
+@media screen and (min-width: 764px) {
+    .order-page-order-items-image > img{
+        height: 300px;
+        width: 300px;
+        object-fit: cover;
+    }
+}

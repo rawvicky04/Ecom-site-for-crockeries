@@ -56,8 +56,9 @@
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    border-bottom: 1px solid gray;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
 }
 
 
@@ -91,6 +92,7 @@
         display: flex;
         background-color: white;
         margin-right: 5px;
+        padding: 5px;
     }
 
     .cart-page-checkout-final-button{
@@ -111,10 +113,16 @@
         margin-left: 5%;
         margin-right: 5%;
     }
+
+    .cart-checkout-page-main-component{
+        margin-top: 80px;
+    }
+
     .cart-checout-adderss-component{
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 40% 60%;
         margin: 10px;
+
     }
 }
 
