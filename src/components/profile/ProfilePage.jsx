@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Appbar from '../Appbar'
 import './profilePage.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import BottomNavbar from '../BottomNavbar';
 
 function ProfilePage() {
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ function ProfilePage() {
   return (
     <div>
         <Appbar />
+        {firstName ?
         <div className='profile-page-main-component'>
             <input className='profile-page-logo' type="text" value={fname[0].toUpperCase()+ lname[0].toUpperCase()}/>
             <div className='profile-page-details'>
@@ -59,7 +61,12 @@ function ProfilePage() {
                 <label>Gender</label>
                 <input type="text" name='gender' value={gender} onChange={handleChange}/>
             </div>
-        </div>
+        </div> : 
+        <p style={{marginTop: "75px"}}>Please <Link to="/login">Login</Link> to view your profile</p>
+        }
+        {firstName && <div className="bottom-navbar-component">
+          <BottomNavbar/>
+        </div>}
         {/* <button onClick={handleAddProduct}>Add Product</button> */}
     </div>
   )

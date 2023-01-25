@@ -17,6 +17,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Fab from '@mui/material/Fab';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
+import BottomNavbar from '../BottomNavbar';
 
 function CartPage() {
     const navigate = useNavigate();
@@ -146,7 +147,7 @@ function CartPage() {
   return (
     <div>
         <Appbar />
-        <h1 style={{marginTop: "70px"}} 
+        <h1 style={{marginTop: "70px",}} 
           // onClick={fetchUser}
         >Cart Items</h1>
         {
@@ -219,13 +220,16 @@ function CartPage() {
             :
               <div className='cart-page-checkout-component'>
                 <div className='cart-page-total-cart-price-component'>
-                  <p>Total Cart Value</p>
+                  <p>Total Cart Value -</p>
                   <p> <CurrencyRupeeIcon fontSize='small'/> </p>
                   <p>{totalCartPrice}</p>
                 </div>
                 <button className='cart-page-checkout-final-button' onClick={handleCartCheckout}>Proceed To Checkout</button>
               </div>
         }
+        {user && <div className="bottom-navbar-component">
+          <BottomNavbar/>
+        </div>}
         {loading && <CircularProgress />}
     </div>
   )

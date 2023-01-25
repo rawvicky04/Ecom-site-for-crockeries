@@ -136,7 +136,8 @@ function ProductDrawer(props) {
                         {props.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.description || props.title || ""}
+                        {props.description + " " || props.title || ""}
+                        <span className='product-drawer-more-items' onClick={handleProductClick}>...more</span>
                     </Typography>
                     <Typography gutterBottom variant="h6" component="div" sx={{marginTop: "10px"}}>
                         Price - Rs. {props.price}
@@ -158,7 +159,7 @@ function ProductDrawer(props) {
                             </Fab>
                         </div>
                         <div className='product-drawer-cart-button'>
-                            <Fab color="primary" aria-label="addToCart" variant="extended" sx={{margin: "10px",}}
+                            <Fab color="primary" aria-label="addToCart" variant="extended" sx={{margin: "10px", marginTop: "6px"}}
                                     onClick={handleCart}
                                 >
                                 Add To Cart

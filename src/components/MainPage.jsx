@@ -22,6 +22,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementByAmount } from "./redux/CounterSlice";
 import MainHomePage from "./home/MainHomePage";
+import BottomNavbar from "./BottomNavbar";
 
 const imgArr = [photo1, photo2, photo3];
 
@@ -148,6 +149,10 @@ function MainPage() {
           />
         )}
       </div>
+      <div className="bottom-navbar-component">
+      <BottomNavbar/>
+      </div>
+      
     </div>
   );
 }

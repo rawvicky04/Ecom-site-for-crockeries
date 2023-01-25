@@ -1,12 +1,17 @@
 .order-page-orders{
     margin: 10px;
     border-bottom: 2px solid gainsboro;
+    background-color: whitesmoke;
 }
 
 .order-page-order-items{
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: center;
+    grid-template-columns: 30% 70%;
+}
+
+.order-page-buy-view-button{
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .order-page-order-items-image{
@@ -16,8 +21,8 @@
 }
 
 .order-page-order-items-image > img{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 80px;
     object-fit: cover;
 }
 
@@ -28,10 +33,66 @@
     margin: 2px;
 }
 
+.order-page-buy-view-button{
+    background-color: white;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+    margin: 2px;
+    
+}
+
+.order-page-buy-button{
+    width: 100%;
+    padding: 12px 36px;
+    margin: 5px;
+    background-color: #1976d2;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-page-buy-button:hover{
+    opacity: 0.8;
+}
+
+.order-page-view-button{
+    width: 100%;
+    padding: 12px 36px;
+    margin: 5px;
+    background-color: #1976d2;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-page-view-button:hover{
+    opacity: 0.8;
+}
+
+.order-page-total-sum{
+    width: 100%;
+    background-color: white;
+    padding: 5px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media screen and (min-width: 764px) {
     .order-page-order-items-image > img{
-        height: 300px;
+        height: 200px;
         width: 300px;
         object-fit: cover;
+    }
+    .order-page-order-items{
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+    .order-page-buy-view-button{
+        grid-column-start: 3;
+        grid-column-end: 4;
     }
 }

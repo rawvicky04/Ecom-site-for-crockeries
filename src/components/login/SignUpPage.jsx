@@ -38,6 +38,19 @@ function SignUpPage() {
 
     const handleSubmit = e =>{
         e.preventDefault();
+        if(firstName.length <= 0){
+            alert("Please Enter your first name..")
+            return;
+        }else if(lastName.length <= 0){
+            alert("Please Enter your last name..")
+            return;
+        }else if(email.length <= 0){
+            alert("Please Enter your email first..")
+            return;
+        }else if(lastName.length <= 0){
+            alert("Please Enter your password. So that you can login at later stage")
+            return;
+        }
         createUserWithEmailAndPassword(auth, email, password).
         then((userCredential) => {
             console.log("User credential", userCredential.user);
@@ -47,6 +60,9 @@ function SignUpPage() {
                 last_name: lastName,
                 email: email,
                 gender: "",
+                orders: [],
+                cart_items: [],
+                address: [],
             });
             let userObj = {
                 first_name: firstName,
@@ -79,10 +95,11 @@ function SignUpPage() {
                 }}
                 noValidate
                 autoComplete="off"
+                
                 >
-                <TextField label="First Name" variant="standard" name='fname' onChange={handleChange}/>
+                <TextField label="First Name" variant="standard" name='fname' onChange={handleChange} required/>
                 <br></br>  
-                <TextField label="Last Name" variant="standard" name='lname' onChange={handleChange}/>
+                <TextField label="Last Name" variant="standard" name='lname' onChange={handleChange} required/>
                 {/* <br></br> 
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Age
@@ -99,14 +116,13 @@ function SignUpPage() {
                     <option value={30}>Thirty</option>
                 </NativeSelect> */}
                 <br></br>
-                <TextField id="standard-basic" label="Email" variant="standard" name='email' onChange={handleChange}/>
+                <TextField id="standard-basic" label="Email" variant="standard" name='email' onChange={handleChange} required/>
                 <br></br>
-                <TextField id="standard-adornment-password" label="Password" variant="standard" type={"password"} name = 'password' onChange={handleChange}/>
+                <TextField id="standard-adornment-password" label="Password" variant="standard" type={"password"} name = 'password' onChange={handleChange} required/>
                 <br></br>
-                <Button variant="contained" endIcon={<SendIcon />} onClick={e => handleSubmit(e)} sx={{width: "32ch !important"}}>
+                <Button variant="contained" onClick={e => handleSubmit(e)} endIcon={<SendIcon />} sx={{width: "32ch !important"}}>
                     Sign Up
-                </Button>
-                
+                </Button>   
             </Box>
             <Link to="/login" style={{textDecoration: "none", color: "blue"}}> <Typography sx={{marginLeft: 0.4}}>Already have an account? Sign In</Typography></Link>
         </div>
