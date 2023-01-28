@@ -91,6 +91,7 @@ function Appbar() {
     setAnchorEl(null);
     handleMobileMenuClose();
     setOpenSuccessSnackbar(true);
+    navigate("/");
   };
 
   const handleProfilePage = () => {

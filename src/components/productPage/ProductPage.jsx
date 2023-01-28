@@ -149,6 +149,8 @@ function ProductPage() {
         </div>
       </div>
       <SimilarProduct id={location.state.id} data={location.state.data} />
+      <div className="bottom-navbar-component">
+      <BottomNavbar value={0} /></div>
       {user && <div className="bottom-navbar-component">
           <BottomNavbar/>
         </div>}

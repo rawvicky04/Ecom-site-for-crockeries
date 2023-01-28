@@ -10,17 +10,26 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import HomeIcon from "@mui/icons-material/Home";
+import { Link } from 'react-router-dom';
 
-function BottomNavbar() {
+function BottomNavbar(props) {
     const navigate = useNavigate();
-    const [value, setValue] = useState(4);
+    const [value, setValue] = useState(props?.value || 0);
+    const handleClickHome = () =>{
+        setValue(0);
+        navigate("/");
+    }
     const handleClickCart = () =>{
+        setValue(1);
         navigate("/cart");
     }
     const handleClickOrder = () =>{
+        setValue(2);
         navigate("/order");
     }
     const handleClickProfile = () =>{
+        setValue(3);
         navigate("/profile");
     }
   return (
@@ -28,12 +37,12 @@ function BottomNavbar() {
         <BottomNavigation
             showLabels
             value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
+            // onChange={(event, newValue) => {
+            //     setValue(newValue);
+            // }}
             >
-                
-            <BottomNavigationAction label="Cart" icon={<AddShoppingCartIcon />} onClick={handleClickCart}/>
+            <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={handleClickHome}/>
+            <BottomNavigationAction label="Cart" icon={<AddShoppingCartIcon />}  onClick={handleClickCart} />
             <BottomNavigationAction label="Orders" icon={<ShoppingBagIcon />} onClick={handleClickOrder} />
             <BottomNavigationAction label="Profile" icon={<AccountCircle />} onClick={handleClickProfile} />
         </BottomNavigation>

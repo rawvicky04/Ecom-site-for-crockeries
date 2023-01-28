@@ -34,6 +34,20 @@
     border-color: gray;
 }
 
+.profile-page-button{
+    margin: 10px;
+    border:none;
+    padding: 12px 32px;
+    background-color: #1976d2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-page-button:hover{
+    opacity: 0.8;
+}
+
 @media screen and (min-width: 300px) {
     .profile-page-details{
         display: grid;

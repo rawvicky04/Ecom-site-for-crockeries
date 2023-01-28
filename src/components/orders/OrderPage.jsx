@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef } from 'react'
 import Appbar from '../Appbar'
-import { collection, getDocs, addDoc, doc, getDoc, deleteDoc, updateDoc, arrayRemove, setDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, getDoc, deleteDoc, updateDoc, arrayRemove, setDoc, arrayUnion } from "firebase/firestore";
 import { db } from '../firebase/firebase';
 import { useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
@@ -19,9 +19,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import './OrderPage.css';
 import BottomNavbar from '../BottomNavbar';
+import { useDispatch } from 'react-redux';
+import { incrementByAmount } from '../redux/CounterSlice';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 function OrderPage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cartProduct.product);
     const user = useSelector((state) => state.user.name);
     console.log("Cart Items", cartItems);
@@ -31,9 +41,18 @@ function OrderPage() {
     const [ordersArray, setOrderArray] = useState([]);
     const [ordersItemArray, setOrdersItemArray] = useState([]);
     const [productArray, setProductArray] = useState([]);
+    const vertical = "top",
+    horizontal = "center";
+    const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
+
+
     let sum = 0;
 
     let sumOfCart = 0;
+
+    const handleSuccessSnackClose = () => {
+      setOpenSuccessSnackbar(false);
+    };
 
     useEffect(()=>{
       if(user){
@@ -75,6 +94,58 @@ function OrderPage() {
       }
       
     },[flag])
+
+    const handleBuyItAgain = async (e) =>{
+      setLoading(true);
+      console.log(e);
+      if(user === ""){
+        setLoading(false);
+        navigate("/login");
+    }else{
+        const uniqId = userUid + e.productId;
+        const cartRef = await getDoc(doc(db, "cart", uniqId));
+        const userRef = doc(db, "users", userUid);
+        if(cartRef.exists()){
+            let qty= cartRef.data().quantity;
+            setDoc(doc(db, "cart", uniqId), {
+                productId: e.productId,
+                quantity: 1+qty,
+            })
+        }else{
+            setDoc(doc(db, "cart", uniqId), {
+                productId: e.productId,
+                quantity: 1,
+            }).then(()=>{
+                updateDoc(userRef,{
+                    cart_items: arrayUnion(uniqId),
+                });
+            })
+        }
+        dispatch(incrementByAmount(1));
+        setLoading(false);
+        setOpenSuccessSnackbar(true);
+    }
+    }
+
+    const handleViewProduct = (e) =>{
+      setLoading(true);
+      getDoc(doc(db,"products", e.productId)).then((productDetails) => {
+        let orderProductDetails = {
+          id: productDetails.id,
+          data: productDetails.data(),
+        }
+        setLoading(false);
+        navigate("/productPage", {
+          state: {
+              id: e.productId,
+              data: orderProductDetails.data,
+          }
+        })
+        
+      })
+
+      ;
+    }
   
   return (
     <div>
@@ -110,8 +181,8 @@ function OrderPage() {
                         <p style={{margin: 0}}><b>Ordered Quantity</b> - {orderItem.quantity} unit/s</p>
                       </div> 
                       <div className='order-page-buy-view-button'>
-                        <button className='order-page-buy-button'>Buy it again</button>
-                        <button className='order-page-view-button'>View more details</button>
+                        <button className='order-page-buy-button' onClick={() => handleBuyItAgain(orderItem)}>Buy it again</button>
+                        <button className='order-page-view-button' onClick={() => handleViewProduct(orderItem)}>View more details</button>
                       </div>
                     </div>
                   )
@@ -131,10 +202,26 @@ function OrderPage() {
         </>:
         <p style={{marginTop: "75px"}}>Please <Link to="/login">Login</Link> to view your Order</p>
         }
-        {user && <div className="bottom-navbar-component">
-          <BottomNavbar/>
-        </div>}
+        <div className="bottom-navbar-component">
+          <BottomNavbar  value={2} />
+        </div>
         {loading && <CircularProgress />}
+        {openSuccessSnackbar && (
+        <Snackbar
+          open={openSuccessSnackbar}
+          autoHideDuration={10000}
+          anchorOrigin={{ vertical, horizontal }}
+          onClose={handleSuccessSnackClose}
+        >
+          <Alert
+            onClose={handleSuccessSnackClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            This Product has been added to your cart successfully. Please check your cart for more details.
+          </Alert>
+        </Snackbar>
+      )}
     </div>
   )
 }

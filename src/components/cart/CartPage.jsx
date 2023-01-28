@@ -227,9 +227,9 @@ function CartPage() {
                 <button className='cart-page-checkout-final-button' onClick={handleCartCheckout}>Proceed To Checkout</button>
               </div>
         }
-        {user && <div className="bottom-navbar-component">
-          <BottomNavbar/>
-        </div>}
+        <div className="bottom-navbar-component">
+          <BottomNavbar value={1} />
+        </div>
         {loading && <CircularProgress />}
     </div>
   )

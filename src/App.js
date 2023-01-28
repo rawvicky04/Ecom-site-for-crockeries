@@ -21,6 +21,7 @@ import ProductPage from './components/productPage/ProductPage';
 import AdminPage from './components/admin/AdminPage';
 import AdminHandler from './components/admin/AdminHandler';
 import { useState } from 'react';
+import { BottomNavigation } from '@mui/material';
 
 function App() {
   const admin = useSelector((state) => state.user.name);
@@ -71,7 +72,6 @@ function App() {
           <Route path= '/admin' element={<AdminHandler />} />
         </Routes>
       </BrowserRouter>
-      
       {/* <MainPage /> */}
     </div>
   );

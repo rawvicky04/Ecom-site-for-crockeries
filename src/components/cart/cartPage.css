@@ -65,6 +65,30 @@
     opacity: 0.8;
 }
 
+.cart-checkout-prev-address{
+    display: grid;
+    grid-template-columns: 10% 30%;
+    justify-content: center;
+    text-align: left;
+    margin: 5px;
+    
+}
+
+.cart-checkout-prev-address input[type="radio"]{
+    width: 30px;
+}
+
+.cart-checkout-prev-address label{
+    border: 1px solid gainsboro;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.cart-checkout-prev-address-collection{
+    padding: 5px;
+}
+
 
 @media screen and (min-width: 300px) {
     .cartPage-product-list{
@@ -130,6 +154,13 @@
         margin: 10px;
 
     }
+    .cart-checkout-prev-address{
+        display: grid;
+        grid-template-columns: 15% 80%;
+        justify-content: center;
+        text-align: left;
+        
+    }
 }
 
 @media screen and (min-width: 790px) {
@@ -189,6 +220,13 @@
         grid-template-columns: 20% 30%;
         justify-content: center;
         margin: 10px;
+    }
+    .cart-checkout-prev-address{
+        display: grid;
+        grid-template-columns: 5% 30%;
+        justify-content: center;
+        text-align: left;
+        
     }
 }
 

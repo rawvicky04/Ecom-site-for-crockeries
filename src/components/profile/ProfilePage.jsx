@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import Appbar from '../Appbar'
 import './profilePage.css'
 import { useNavigate, Link } from 'react-router-dom';
 import BottomNavbar from '../BottomNavbar';
+import { db } from '../firebase/firebase';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
 
 function ProfilePage() {
     const navigate = useNavigate();
@@ -12,18 +22,28 @@ function ProfilePage() {
     const uid = useSelector((state) => state.user.uid);
     const firstName = useSelector((state) => state.user.name);
     const lastName = useSelector((state) => state.user.surname);
-
-    
-    console.log(uid);
-    console.log(firstName);
+    const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
     const[fname, setFname] = useState(firstName);
     const[lname, setLname] = useState(lastName);
-    const[gender, setGender] = useState("Male");
+    const[gender, setGender] = useState("");
+    const [loading, setLoading] = useState(false);
+    const vertical = "top",
+    horizontal = "center";
+    const handleSuccessSnackClose = () => {
+        setOpenSuccessSnackbar(false);
+      };
 
     useEffect(()=>{
-        setFname(firstName);
-        setLname(lastName);
-    },[firstName, lastName])
+        getUser();
+    },[])
+
+    const getUser = () =>{
+        getDoc(doc(db, "users", uid)).then((userDetails) => {
+            setFname(userDetails.data().first_name);
+            setLname(userDetails.data().last_name);
+            setGender(userDetails.data().gender);    
+        })
+    }
 
     const handleChange = (e) =>{
         if(e.target.name === "fname"){
@@ -33,6 +53,19 @@ function ProfilePage() {
         }else if(e.target.name === "gender"){
             setGender(e.target.value);
         }
+    }
+
+    const handleUpadteProfile = () =>{
+        setLoading(true);
+        updateDoc(doc(db, "users", uid), {
+            first_name: fname,
+            last_name: lname,
+            email: email,
+            gender: gender,
+        }).then(()=>{
+            setOpenSuccessSnackbar(true);
+            setLoading(false);
+        })
     }
 
     // const handleAddProduct = () =>{
@@ -61,13 +94,30 @@ function ProfilePage() {
                 <label>Gender</label>
                 <input type="text" name='gender' value={gender} onChange={handleChange}/>
             </div>
+            <button className = "profile-page-button" onClick={handleUpadteProfile}>Update Profile</button>
         </div> : 
         <p style={{marginTop: "75px"}}>Please <Link to="/login">Login</Link> to view your profile</p>
         }
-        {firstName && <div className="bottom-navbar-component">
-          <BottomNavbar/>
-        </div>}
-        {/* <button onClick={handleAddProduct}>Add Product</button> */}
+        <div className="bottom-navbar-component">
+          <BottomNavbar  value={3} />
+        </div>
+        {openSuccessSnackbar && (
+        <Snackbar
+          open={openSuccessSnackbar}
+          autoHideDuration={10000}
+          anchorOrigin={{ vertical, horizontal }}
+          onClose={handleSuccessSnackClose}
+        >
+          <Alert
+            onClose={handleSuccessSnackClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your profile has been successfully updated.
+          </Alert>
+        </Snackbar>
+      )}
+      {loading && <CircularProgress />}
     </div>
   )
 }
