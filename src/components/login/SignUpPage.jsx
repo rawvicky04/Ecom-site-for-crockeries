@@ -15,6 +15,7 @@ import Appbar from '../Appbar';
 import { Button } from '@mui/material';
 import { userName } from '../redux/userSlice';
 import { Link } from 'react-router-dom';
+import BottomNavbar from '../BottomNavbar';
 
 function SignUpPage() {
     const [email, setEmail] = useState("");
@@ -126,6 +127,9 @@ function SignUpPage() {
             </Box>
             <Link to="/login" style={{textDecoration: "none", color: "blue"}}> <Typography sx={{marginLeft: 0.4}}>Already have an account? Sign In</Typography></Link>
         </div>
+        <div className="bottom-navbar-component">
+      <BottomNavbar/>
+      </div>
     </div>
   )
 }

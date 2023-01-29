@@ -15,6 +15,7 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+import BottomNavbar from '../BottomNavbar';
 
 function LoginPage() {
 
@@ -83,6 +84,9 @@ function LoginPage() {
             </Box>
             <Link to="/signUp" style={{textDecoration: "none", color: "blue"}}> <Typography sx={{marginLeft: 0.4}}>Don't have an account? Sign Up</Typography> </Link>
         </div>
+        <div className="bottom-navbar-component">
+      <BottomNavbar/>
+      </div>
     </div>
   )
 }

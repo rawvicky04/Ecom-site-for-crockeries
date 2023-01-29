@@ -12,9 +12,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function BottomNavbar(props) {
     const navigate = useNavigate();
+    const user = useSelector((state)=> state.user.name);
     const [value, setValue] = useState(props?.value || 0);
     const handleClickHome = () =>{
         setValue(0);
@@ -30,7 +32,8 @@ function BottomNavbar(props) {
     }
     const handleClickProfile = () =>{
         setValue(3);
-        navigate("/profile");
+        if(user) navigate("/profile");
+        else navigate("/login");
     }
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
